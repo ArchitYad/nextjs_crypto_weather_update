@@ -1,6 +1,7 @@
+import { NextRequest } from "next/server";
 import { getCityWeatherData } from "@/lib/getCittyWeatherData";
 
-export async function GET(req: Request, { params }: { params: { city: string } }) {
+export async function GET(req: NextRequest, { params }: { params: { city: string } }) {
   const city = params.city;
   const data = await getCityWeatherData(city);
 

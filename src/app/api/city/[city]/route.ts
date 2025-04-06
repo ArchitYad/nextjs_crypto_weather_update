@@ -1,10 +1,11 @@
 import { NextRequest } from "next/server";
 import { getCityWeatherData } from "@/lib/getCittyWeatherData";
 
-// Use `context` as the second argument and destructure from it
-export async function GET(req: NextRequest, context: { params: { city: string } }) {
-  const { city } = context.params;
-
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Record<string, string> }
+) {
+  const city = params.city;
   const data = await getCityWeatherData(city);
   return Response.json(data);
 }

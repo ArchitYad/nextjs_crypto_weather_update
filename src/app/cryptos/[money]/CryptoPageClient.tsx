@@ -121,12 +121,15 @@ export default function CryptoPageClient({ money, historicalData: serverData }: 
         <h1 className="text-2xl sm:text-3xl font-bold capitalize">{money} Dashboard</h1>
         <div className="flex items-center space-x-4">
           {/* Favorite Button */}
-          <button
-            onClick={handleFavoriteClick}
-            className="py-2 px-4 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition duration-200"
-          >
-            {isFavorite ? "★ Favorited" : "☆ Add to Favorites"}
-          </button>
+          <button onClick={handleFavoriteClick}
+      className="flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 text-sm sm:text-base bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition duration-300">
+    <span className="text-lg sm:text-xl">
+     {isFavorite ? "❤️" : "🤍"}
+  </span>
+  <span>
+    {isFavorite ? "Remove Favorite" : "Add to Favorites"}
+  </span>
+</button>
 
           {/* Notification Bell */}
           <div className="relative">

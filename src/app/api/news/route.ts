@@ -1,18 +1,13 @@
 // app/api/news/route.ts
 import { NextResponse } from "next/server";
+import { fetchNewsData } from "@/lib/newsService";
 
 export async function GET() {
-  const apiKey = process.env.YOUR_NEWSDATA_API_KEY;
+  const news = await fetchNewsData();
 
-  if (!apiKey) {
-    return NextResponse.json({ error: "Missing News API key" }, { status: 500 });
-  }
-
-  try {
-    const res = await fetch(`https://newsdata.io/api/1/latest?apikey=${apiKey}&q=cryptocurrency&language=en`);
-    const data = await res.json();
-    return NextResponse.json(data.results.slice(0, 5));
-  } catch (err) {
+  if (news.length === 0) {
     return NextResponse.json({ error: "Failed to fetch news" }, { status: 500 });
   }
+
+  return NextResponse.json(news);
 }

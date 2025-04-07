@@ -2,9 +2,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
 
-export async function GET(req: NextRequest, { params }: { params: { money: string } }) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ money: string }> }) {
   try {
-    const { money } = params;
+    const { money } =  await params;
 
     const client = await clientPromise;
     const db = client.db('data');

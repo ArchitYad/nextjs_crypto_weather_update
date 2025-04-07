@@ -1,10 +1,9 @@
-// app/api/favcity/[city]/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
 
-export async function GET(req: NextRequest, { params }: { params: { city: string } }) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ city: string }> }) {
   try {
-    const { city } = params;
+    const { city } =  await params;
 
     const client = await clientPromise;
     const db = client.db('data');

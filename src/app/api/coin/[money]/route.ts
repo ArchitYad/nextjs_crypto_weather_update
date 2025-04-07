@@ -19,8 +19,8 @@ const currencyMap: Record<string, string> = {
   cosmos: 'ATOM'
 };
 
-export async function GET(req: NextRequest, { params }: { params: { money: string } }) {
-  const { money } = params;
+export async function GET(req: NextRequest, { params }: { params: Promise<{ money: string }>}) {
+  const { money } = await params;
 
   console.log('[HISTORICAL API] Requested for:', money);
 

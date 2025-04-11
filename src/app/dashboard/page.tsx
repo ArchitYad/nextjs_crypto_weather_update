@@ -60,27 +60,31 @@ export default async function DashboardPage() {
   
     {/* Crypto Section */}
     <section className="space-y-6">
-      <h2 className="text-2xl font-semibold text-gray-700">💹 Crypto Market Overview</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {crypto.length > 0 ? (
-          crypto.map((c: CryptoData, index: number) => (
-            <div
-              key={index}
-              className="bg-yellow-50 border border-yellow-200 p-5 rounded-2xl shadow-md hover:shadow-lg transition-all"
-            >
-              <h3 className="text-lg font-bold text-yellow-700 mb-1 capitalize">
-                {c.name} ({c.symbol})
-              </h3>
-              <p>💲 <span className="font-medium">Price:</span> ${parseFloat(c.priceUsd).toFixed(2)}</p>
-              <p>📉 <span className="font-medium">24h Change:</span> {parseFloat(c.changePercent24Hr).toFixed(2)}%</p>
-              <p>💰 <span className="font-medium">Market Cap:</span> ${Number(c.marketCapUsd).toLocaleString()}</p>
-            </div>
-          ))
-        ) : (
-          <div className="col-span-full text-center text-gray-500">No crypto data available.</div>
-        )}
-      </div>
-    </section>
+  <h2 className="text-2xl font-semibold text-gray-700">💹 Crypto Market Overview</h2>
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    {crypto.length > 0 ? (
+      crypto
+        .filter((c: CryptoData) =>
+          ['bitcoin', 'ethereum', 'cardano'].includes(c.id.toLowerCase())
+        )
+        .map((c: CryptoData, index: number) => (
+          <div
+            key={index}
+            className="bg-yellow-50 border border-yellow-200 p-5 rounded-2xl shadow-md hover:shadow-lg transition-all"
+          >
+            <h3 className="text-lg font-bold text-yellow-700 mb-1 capitalize">
+              {c.name} ({c.symbol})
+            </h3>
+            <p>💲 <span className="font-medium">Price:</span> ${parseFloat(c.priceUsd).toFixed(2)}</p>
+            <p>📉 <span className="font-medium">24h Change:</span> {parseFloat(c.changePercent24Hr).toFixed(2)}%</p>
+            <p>💰 <span className="font-medium">Market Cap:</span> ${Number(c.marketCapUsd).toLocaleString()}</p>
+          </div>
+        ))
+    ) : (
+      <div className="col-span-full text-center text-gray-500">No crypto data available.</div>
+    )}
+  </div>
+</section>
   
     {/* News Section */}
     <section className="space-y-6">
